@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masroofe</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="container py-4">
+
+  <h2 class="mb-4">💸 Masroofe</h2>
+
+  <div id="alert-box"></div>
+
+  <div class="summary-grid">
+    <div class="card text-white p-3 text-center" style="background:#63b3ed;">
+      <div>Total Spent</div>
+      <h4 id="total">$0.00</h4>
+    </div>
+    <div class="card text-white p-3 text-center" style="background:#414345;">
+      <div>Expenses</div>
+      <h4 id="count">0</h4>
+    </div>
+    <div class="card text-white p-3 text-center" style="background:#2d6a8f;">
+      <div>Highest</div>
+      <h4 id="highest">$0.00</h4>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <h5>➕ Add Expense</h5>
+    <div id="form-error" class="text-danger mb-2 d-none"></div>
+    <div class="row g-2">
+      <div class="col-md-3">
+        <input type="text" id="title" class="form-control" placeholder="Title">
+      </div>
+      <div class="col-md-2">
+        <input type="number" id="amount" class="form-control" placeholder="Amount">
+      </div>
+      <div class="col-md-3">
+        <select id="category" class="form-select">
+          <option value="">Select category</option>
+          <option>Food</option>
+          <option>Transport</option>
+          <option>Bills</option>
+          <option>Entertainment</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <input type="date" id="date" class="form-control">
+      </div>
+      <div class="col-md-2">
+        <button onclick="addExpense()" class="btn btn-primary w-100">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-wrapper">
+    <label>Filter by category</label>
+    <select id="filter" class="form-select w-auto" onchange="filterExpenses()">
+      <option value="All">All</option>
+      <option>Food</option>
+      <option>Transport</option>
+      <option>Bills</option>
+      <option>Entertainment</option>
+      <option>Other</option>
+    </select>
+  </div>
+
+  <div class="table-card">
+    <div id="spinner" class="text-center py-4">
+      <div class="spinner-border" style="color:#63b3ed;"></div>
+    </div>
+    <table class="table table-hover d-none" id="expense-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="expense-body"></tbody>
+    </table>
+  </div>
+
+  <div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">✏️ Edit Expense</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="edit-error" class="text-danger mb-2 d-none"></div>
+          <input type="hidden" id="edit-id">
+          <div class="mb-2">
+            <input type="text" id="edit-title" class="form-control" placeholder="Title">
+          </div>
+          <div class="mb-2">
+            <input type="number" id="edit-amount" class="form-control" placeholder="Amount">
+          </div>
+          <div class="mb-2">
+            <select id="edit-category" class="form-select">
+              <option>Food</option>
+              <option>Transport</option>
+              <option>Bills</option>
+              <option>Entertainment</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <input type="date" id="edit-date" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" onclick="saveEdit()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
